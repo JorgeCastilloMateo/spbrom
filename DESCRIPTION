@@ -1,0 +1,17 @@
+Package: spbrom
+Type: Package
+Title: Spatial Bivariate Modeling for the Occurrence of Record-Breaking Events
+Version: 0.0.0.9001
+Date: 2024-03-11
+Authors@R: c(
+  person("Jorge", "Castillo-Mateo", role = c("aut","cre","cph"), email = "jorgecastillomateo@gmail.com", comment = c(ORCID = "0000-0003-3859-0248"))
+  )
+Author: Jorge Castillo-Mateo [aut, cre, cph] (<https://orcid.org/0000-0003-3859-0248>)
+Maintainer: Jorge Castillo-Mateo <jorgecastillomateo@gmail.com>
+Description: Fitting, prediction and validation of bivariate spatial models for
+  the occurrence of record-breaking events over time in two dependent processes.
+License: GPL (>= 2)
+Imports: Rcpp (>= 1.0.11)
+LinkingTo: Rcpp, RcppArmadillo
+Encoding: UTF-8
+RoxygenNote: 7.3.1
