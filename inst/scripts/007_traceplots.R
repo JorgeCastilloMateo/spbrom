@@ -1,5 +1,5 @@
 #################################
-### Section 4 - TRACEPLOTS M4 ###
+### Section 4 - TRACEPLOTS M5 ###
 #################################
 
 # Re-assign
@@ -26,7 +26,7 @@ name <- c(bquote("(Intercept) " (T[x])),
           bquote("trend " (T[x])),
           bquote("lag.tx " (T[x])),
           bquote("lag.tn " (T[x])),
-          bquote("log(dist) " (T[x])),
+          bquote("log(1+dist) " (T[x])),
           bquote("trend:lag.tx " (T[x])),
           bquote("trend:lag.tn " (T[x])),
           bquote("trend:log(1+dist) " (T[x])))
@@ -151,5 +151,3 @@ for (i in 1:2) {
   lines(model[,2]$params$decay[,i], col = "gray")
   dev.off()
 }
-
-

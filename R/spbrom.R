@@ -1,8 +1,8 @@
 #' @name spbrom-package
 #' @aliases spbrom
-#' @docType _PACKAGE
+#' @docType package
 #'
-#' @title spbrom: Spatial Record Occurrence Model
+#' @title spbrom: Spatial Bivariate Record Occurrence Model
 #' @description
 #'   Fitting, prediction and validation of bivariate spatial models for the
 #'   occurrence of record-breaking events over time in two dependent processes.
@@ -15,4 +15,4 @@
 #' @useDynLib spbrom
 #' @importFrom Rcpp evalCpp
 #' @exportPattern "^[[:alpha:]]+"
-NULL
+"_PACKAGE"

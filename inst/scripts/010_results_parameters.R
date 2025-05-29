@@ -80,8 +80,8 @@ cat(in.tex(my.summary((a21^2 + a22^2) / (a21^2 + a22^2 + 1))))
 
 ## hyperparameter's (only for M5)
 hpA <- rbind(model[,1]$params$hpA, model[,2]$params$hpA)
-cat(in.tex(my.summary(hpA[,c(1,4,7)])))
-cat(in.tex(my.summary(1 / sqrt(hpA[,c(2,5,8)]))))
+cat(in.tex(my.summary(hpA[,c(1:2,5:6,9:10)])))
+cat(in.tex(my.summary(1 / sqrt(hpA[,c(3,7,11)]))))
 
 
 
@@ -336,8 +336,8 @@ mapSpain(colMeans(a21s0),
 
 mapSpain(colMeans(a21s0 / sqrt(a21s0^2 + a22s0^2)),
          coords_limit = data.frame(X = c(-10, 4), Y = c(35.5, 44)),
-         ref = mean(a21s0 / sqrt(a21s0^2 + a22s0^2)),
-         zlim = NULL,
+         ref = 0.5,
+         zlim = c(0, 1),
          picture.name = "inst/img/SUPP_map_a.png",
          title = expression(a(s)),
          legend.name = "",
@@ -364,7 +364,7 @@ mapSpain(colMeans((a21s0^2 + a22s0^2) / (a21s0^2 + a22s0^2 + 1)),
 mapSpain(colMeans(a11s0^2 / (a11s0^2 + 1) - (a21s0^2 + a22s0^2) / (a21s0^2 + a22s0^2 + 1)),
          coords_limit = data.frame(X = c(-10, 4), Y = c(35.5, 44)),
          ref = mean(a11s0^2 / (a11s0^2 + 1) - (a21s0^2 + a22s0^2) / (a21s0^2 + a22s0^2 + 1)),
-         zlim = c(0, 0.3),
+         zlim = c(0, 0.35),
          picture.name = "inst/img/SUPP_map_a_tx-tn.png",
          title = expression(bar(a)(s) - underline(a)(s)),
          legend.name = "",

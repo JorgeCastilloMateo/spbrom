@@ -2,9 +2,24 @@
 % Please edit documentation in R/predict.R
 \name{predict.brom}
 \alias{predict.brom}
+\alias{predict.default}
+\alias{predict.rom}
+\alias{predict}
 \title{Predict Method for Bivariate Record Occurrence Model Fits}
 \usage{
 \method{predict}{brom}(
+  object,
+  newdata,
+  newcoords,
+  newextra.coords,
+  newmatrix.mean.A = matrix(1, nrow = nrow(newcoords)),
+  newsite,
+  newyear,
+  newday,
+  type = c("KFCV", "sample")
+)
+
+\method{predict}{rom}(
   object,
   newdata,
   newcoords,
@@ -25,6 +40,9 @@ If omitted, the fitted values are used.}
 
 \item{newcoords, newextra.coords}{New coordinates for the sites in
 \code{newdata$site} or \code{newsite}.}
+
+\item{newmatrix.mean.A}{New matrix containing the variables
+in the mean of A (if sp.A was TRUE).}
 
 \item{newsite, newyear, newday}{A vector where for each observation includes
 the site, year or day.}

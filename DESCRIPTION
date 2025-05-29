@@ -1,8 +1,8 @@
 Package: spbrom
 Type: Package
 Title: Spatial Bivariate Modeling for the Occurrence of Record-Breaking Events
-Version: 0.0.0.9001
-Date: 2024-03-11
+Version: 0.0.1
+Date: 2025-05-29
 Authors@R: c(
   person("Jorge", "Castillo-Mateo", role = c("aut","cre","cph"), email = "jorgecastillomateo@gmail.com", comment = c(ORCID = "0000-0003-3859-0248"))
   )
@@ -14,4 +14,4 @@ License: GPL (>= 2)
 Imports: Rcpp (>= 1.0.11)
 LinkingTo: Rcpp, RcppArmadillo
 Encoding: UTF-8
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2

@@ -10,6 +10,7 @@ brom(
   coords,
   extra.coords,
   sp.A = FALSE,
+  matrix.mean.A = matrix(1, nrow = nrow(coords)),
   site,
   year,
   day,
@@ -39,6 +40,9 @@ coordinates of the sites.}
 spatial covariates to be included in the spatial correlation function.}
 
 \item{sp.A}{a boolean indicating a spatially-varying coregionalization.}
+
+\item{matrix.mean.A}{a matrix (\eqn{n \times q}) containing the variables
+in the mean of A (if sp.A is TRUE).}
 
 \item{site, year, day}{vectors (\eqn{N \times 1}) containing the site, year,
 and day the measurements were taken.}

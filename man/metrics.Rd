@@ -4,7 +4,7 @@
 \alias{metrics}
 \title{Metrics for Validation}
 \usage{
-metrics(Y, p, year, metric = c("DIC", "CV"), D1 = 2:31, D2 = 32:63)
+metrics(Y, p, year, metric = c("DIC", "CV", "pCV"), D1 = 2:31, D2 = 32:64)
 }
 \arguments{
 \item{Y}{The observed values (vector)}
@@ -13,7 +13,9 @@ metrics(Y, p, year, metric = c("DIC", "CV"), D1 = 2:31, D2 = 32:63)
 
 \item{year}{The year associated with the values (vector)}
 
-\item{metric}{A character string \code{"DIC"} or \code{"CV"}}
+\item{metric}{A character string \code{"DIC"}, \code{"CV"} or \code{"pCV"}
+(CV is the posterior mean of the metric and pCV uses the posterior mean
+of the probabilities of record)}
 
 \item{D1, D2}{Two shorter year periods on which to calculate the metrics, in
 addition to the period of all years}
@@ -26,6 +28,12 @@ If \code{metric = "CV"}; the metrics (vector):
   \item{J}{Jaccard index}
   \item{J1}{J in \code{D1}}
   \item{J2}{J in \code{D2}}
+  \item{AUPRC}{Area under the Precission-Recall curve}
+  \item{AUPRC1}{AUPRC in \code{D1}}
+  \item{AUPRC2}{AUPRC in \code{D2}}
+  \item{BS}{Brier Score}
+  \item{BS1}{BS in \code{D1}}
+  \item{BS2}{BS in \code{D2}}
 
   If \code{metric = "DIC"}; a vector with DIC, D (deviance), and penalty (pD)
 }

@@ -1,6 +1,7 @@
-##################################################
-### Section 4 - MODEL FITTING (M1, M2, M3, M4) ###
-##################################################
+#################################
+### Section 4 - MODEL FITTING ###
+###      (M1, M2, M3, M4, M5) ###
+#################################
 
 # M1 (max) - 2 chains in parallel < 20 hours
 data$lag <- data$lag.tx
@@ -91,7 +92,7 @@ saveRDS(M2, file = "data/M2.rds")
 # M3 - 2 chains in parallel ~ 30 hours
 time <- Sys.time()
 cl <- parallel::makeCluster(2)
-parallel::clusterExport(cl, c("data", "coords"))
+parallel::clusterExport(cl, c("data", "coords", "stations"))
 M3 <- parallel::parSapply(cl = cl, X = 1:2,
   FUN = function(iter) {set.seed(23 * iter + 1000); spbrom::brom(
     formula = cbind(tx, tn) ~ trend * (lag.tx + lag.tn + log1p(dist)),
