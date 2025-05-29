@@ -107,7 +107,7 @@ brom <- function(
   mf[[1L]] <- quote(stats::model.frame)
   mf <- eval(mf, parent.frame())
   mt <- attr(mf, "terms")
-  Y <- model.response(mf, "numeric")
+  Y <- stats::model.response(mf, "numeric")
 
   mf0 <- mf1 <- mf
   mf0[!(mf0[,"lag.tx"] %in% 0:1),"lag.tx"] <- 0
@@ -116,13 +116,13 @@ brom <- function(
   mf1[!(mf1[,"lag.tn"] %in% 0:1),"lag.tn"] <- 1
 
   if (is.null(attr(al$Complete, "dimnames"))) {
-    X  <- model.matrix(mt, mf )
-    X0 <- model.matrix(mt, mf0)
-    X1 <- model.matrix(mt, mf1)
+    X  <- stats::model.matrix(mt, mf )
+    X0 <- stats::model.matrix(mt, mf0)
+    X1 <- stats::model.matrix(mt, mf1)
   } else {
-    X  <- model.matrix(mt, mf )[, attr(al$Complete, "dimnames")[[2]]]
-    X0 <- model.matrix(mt, mf0)[, attr(al$Complete, "dimnames")[[2]]]
-    X1 <- model.matrix(mt, mf1)[, attr(al$Complete, "dimnames")[[2]]]
+    X  <- stats::model.matrix(mt, mf )[, attr(al$Complete, "dimnames")[[2]]]
+    X0 <- stats::model.matrix(mt, mf0)[, attr(al$Complete, "dimnames")[[2]]]
+    X1 <- stats::model.matrix(mt, mf1)[, attr(al$Complete, "dimnames")[[2]]]
   }
 
   decay.prior <- match.arg(decay.prior)
@@ -201,16 +201,16 @@ brom <- function(
     # beta 1 2 + wtls 1 2 + a11s a22s a21s + mu prec decay 11 22 21 + decay
     keep <- matrix(nrow = n.sims / n.thin, ncol = 2 * k + 2 * N + 3 * SS + 3 * (q + 2) + M)
     if (is.null(inits)) {
-      inits <- rnorm(2 * k + 2 * N + 3 * SS + 3 * (q + 2) + M)
+      inits <- stats::rnorm(2 * k + 2 * N + 3 * SS + 3 * (q + 2) + M)
       inits[1:(3*SS) + 2 * k + 2 * N] <- exp(inits[1:(3*SS) + 2 * k + 2 * N])
       inits[c(q + 1, 2 * q + 3, 3 * q + 5) + 2 * k + 2 * N + 3 * SS] <- exp(inits[c(q + 1, 2 * q + 3, 3 * q + 5) + 2 * k + 2 * N + 3 * SS])
       inits[c(q + 2, 2 * q + 4, 3 * q + 6) + 2 * k + 2 * N + 3 * SS] <- prior$decay_A
       if (decay.prior == 1) {
         inits[1:M + 2 * k + 2 * N + 3 * SS + 3 * (q + 2)] <- prior$decay[1:M]
       } else if (decay.prior == 2) {
-        inits[1:M + 2 * k + 2 * N + 3 * SS + 3 * (q + 2)] <- runif(M, prior$decay[1], prior$decay[2])
+        inits[1:M + 2 * k + 2 * N + 3 * SS + 3 * (q + 2)] <- stats::runif(M, prior$decay[1], prior$decay[2])
       } else {
-        inits[1:M + 2 * k + 2 * N + 3 * SS + 3 * (q + 2)] <- runif(M, 3 / drange[2,], 3 / drange[1,])
+        inits[1:M + 2 * k + 2 * N + 3 * SS + 3 * (q + 2)] <- stats::runif(M, 3 / drange[2,], 3 / drange[1,])
       }
     } else if ((2 * k + 2 * N + 3 * SS + 3 * (q + 2) + M) != length(inits)) {
       stop("'inits' does not have the proper length")
@@ -280,14 +280,14 @@ brom <- function(
     # beta 1 2 + wtls 1 2 + a11 a22 a21 + decay
     keep <- matrix(nrow = n.sims / n.thin, ncol = 2 * k + 2 * N + 3 + M)
     if (is.null(inits)) {
-      inits <- rnorm(2 * k + 2 * N + 3 + M)
+      inits <- stats::rnorm(2 * k + 2 * N + 3 + M)
       inits[1:3 + 2 * k + 2 * N] <- abs(inits[1:3 + 2 * k + 2 * N])
       if (decay.prior == 1) {
         inits[1:M + 2 * k + 2 * N + 3] <- prior$decay[1:M]
       } else if (decay.prior == 2) {
-        inits[1:M + 2 * k + 2 * N + 3] <- runif(M, prior$decay[1:M], prior$decay[1:M + M])
+        inits[1:M + 2 * k + 2 * N + 3] <- stats::runif(M, prior$decay[1:M], prior$decay[1:M + M])
       } else {
-        inits[1:M + 2 * k + 2 * N + 3] <- runif(M, 3 / drange[2,], 3 / drange[1,])
+        inits[1:M + 2 * k + 2 * N + 3] <- stats::runif(M, 3 / drange[2,], 3 / drange[1,])
       }
     } else if ((2 * k + 2 * N + 3 + M) != length(inits)) {
       stop("'inits' does not have the proper length")

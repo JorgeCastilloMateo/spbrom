@@ -34,8 +34,8 @@ MCMCconvergence <- function(object) {
           coda::effectiveSize(object[,1]$params[[i]]) +
           coda::effectiveSize(object[,2]$params[[i]])
       } else if (ncol(object[,1]$params[[i]]) <= 100) {
-        const <- which(apply(object[,1]$params[[i]], 2, sd) == 0 |
-                         apply(object[,2]$params[[i]], 2, sd) == 0)
+        const <- which(apply(object[,1]$params[[i]], 2, stats::sd) == 0 |
+                         apply(object[,2]$params[[i]], 2, stats::sd) == 0)
         if (length(const) > 0) {
           object[,1]$params[[i]] <- object[,1]$params[[i]][,-const]
           object[,2]$params[[i]] <- object[,2]$params[[i]][,-const]
@@ -86,8 +86,8 @@ MCMCconvergence <- function(object) {
             coda::effectiveSize(object[[1]][,k]$params[[i]]) +
             coda::effectiveSize(object[[2]][,k]$params[[i]])
         } else if (ncol(object[[1]][,k]$params[[i]]) <= 100) {
-          const <- which(apply(object[[1]][,k]$params[[i]], 2, sd) == 0 |
-                         apply(object[[2]][,k]$params[[i]], 2, sd) == 0)
+          const <- which(apply(object[[1]][,k]$params[[i]], 2, stats::sd) == 0 |
+                         apply(object[[2]][,k]$params[[i]], 2, stats::sd) == 0)
           if (length(const) > 0) {
             object[[1]][,k]$params[[i]] <- object[[1]][,k]$params[[i]][,-const]
             object[[2]][,k]$params[[i]] <- object[[2]][,k]$params[[i]][,-const]

@@ -104,20 +104,20 @@ rom <- function(
   mf[[1L]] <- quote(stats::model.frame)
   mf <- eval(mf, parent.frame())
   mt <- attr(mf, "terms")
-  Y <- model.response(mf, "numeric")
+  Y <- stats::model.response(mf, "numeric")
 
   mf0 <- mf1 <- mf
   mf0[!(mf0[,"lag"] %in% 0:1),"lag"] <- 0
   mf1[!(mf1[,"lag"] %in% 0:1),"lag"] <- 1
 
   if (is.null(attr(al$Complete, "dimnames"))) {
-    X  <- model.matrix(mt, mf )
-    X0 <- model.matrix(mt, mf0)
-    X1 <- model.matrix(mt, mf1)
+    X  <- stats::model.matrix(mt, mf )
+    X0 <- stats::model.matrix(mt, mf0)
+    X1 <- stats::model.matrix(mt, mf1)
   } else {
-    X  <- model.matrix(mt, mf )[, attr(al$Complete, "dimnames")[[2]]]
-    X0 <- model.matrix(mt, mf0)[, attr(al$Complete, "dimnames")[[2]]]
-    X1 <- model.matrix(mt, mf1)[, attr(al$Complete, "dimnames")[[2]]]
+    X  <- stats::model.matrix(mt, mf )[, attr(al$Complete, "dimnames")[[2]]]
+    X0 <- stats::model.matrix(mt, mf0)[, attr(al$Complete, "dimnames")[[2]]]
+    X1 <- stats::model.matrix(mt, mf1)[, attr(al$Complete, "dimnames")[[2]]]
   }
 
   decay.prior <- match.arg(decay.prior)
@@ -183,16 +183,16 @@ rom <- function(
     # beta + wtls + a11s + mu prec decay 11 + decay
     keep <- matrix(nrow = n.sims / n.thin, ncol = k + N + SS + 3 + M)
     if (is.null(inits)) {
-      inits <- rnorm(k + N + SS + 3 + M)
+      inits <- stats::rnorm(k + N + SS + 3 + M)
       inits[1:SS + k + N] <- exp(inits[1:SS + k + N])
       inits[2 + k + N + SS] <- exp(inits[2 + k + N + SS])
       inits[3 + k + N + SS] <- prior$decay_A
       if (decay.prior == 1) {
         inits[1:M + k + N + SS + 3] <- prior$decay[1:M]
       } else if (decay.prior == 2) {
-        inits[1:M + k + N + SS + 3] <- runif(M, prior$decay[1], prior$decay[2])
+        inits[1:M + k + N + SS + 3] <- stats::runif(M, prior$decay[1], prior$decay[2])
       } else {
-        inits[1:M + k + N + SS + 3] <- runif(M, 3 / drange[2,], 3 / drange[1,])
+        inits[1:M + k + N + SS + 3] <- stats::runif(M, 3 / drange[2,], 3 / drange[1,])
       }
     } else if ((k + N + SS + 3 + M) != length(inits)) {
       stop("'inits' does not have the proper length")
@@ -255,14 +255,14 @@ rom <- function(
     # beta + wtls + a11 + decay
     keep <- matrix(nrow = n.sims / n.thin, ncol = k + N + 1 + M)
     if (is.null(inits)) {
-      inits <- rnorm(k + N + 1 + M)
+      inits <- stats::rnorm(k + N + 1 + M)
       inits[1 + k + N] <- abs(inits[1 + k + N])
       if (decay.prior == 1) {
         inits[1:M + k + N + 1] <- prior$decay[1:M]
       } else if (decay.prior == 2) {
-        inits[1:M + k + N + 1] <- runif(M, prior$decay[1:M], prior$decay[1:M + M])
+        inits[1:M + k + N + 1] <- stats::runif(M, prior$decay[1:M], prior$decay[1:M + M])
       } else {
-        inits[1:M + k + N + 1] <- runif(M, 3 / drange[2,], 3 / drange[1,])
+        inits[1:M + k + N + 1] <- stats::runif(M, 3 / drange[2,], 3 / drange[1,])
       }
     } else if ((k + N + 1 + M) != length(inits)) {
       stop("'inits' does not have the proper length")

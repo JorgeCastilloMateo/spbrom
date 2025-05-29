@@ -54,18 +54,18 @@ predict.brom <- function(
   newSS <- length(unique(newsite))
   newNN <- nrow(newdata)
 
-  tt <- terms(object)
-  Y <- model.response(model.frame(tt, newdata))
-  Terms <- delete.response(tt)
-  m <- model.frame(Terms, newdata)
+  tt <- stats::terms(object)
+  Y <- stats::model.response(stats::model.frame(tt, newdata))
+  Terms <- stats::delete.response(tt)
+  m <- stats::model.frame(Terms, newdata)
   m0 <- m1 <- m
   m0[!(m0[,"lag.tx"] %in% 0:1),"lag.tx"] <- 0
   m0[!(m0[,"lag.tn"] %in% 0:1),"lag.tn"] <- 0
   m1[!(m1[,"lag.tx"] %in% 0:1),"lag.tx"] <- 1
   m1[!(m1[,"lag.tn"] %in% 0:1),"lag.tn"] <- 1
-  X  <- model.matrix(Terms, m )[,colnames(object$x)]
-  X0 <- model.matrix(Terms, m0)[,colnames(object$x)]
-  X1 <- model.matrix(Terms, m1)[,colnames(object$x)]
+  X  <- stats::model.matrix(Terms, m )[,colnames(object$x)]
+  X0 <- stats::model.matrix(Terms, m0)[,colnames(object$x)]
+  X1 <- stats::model.matrix(Terms, m1)[,colnames(object$x)]
 
   if (type == "KFCV") {
     if (is.null(object$extra.coords)) {
@@ -197,16 +197,16 @@ predict.rom <- function(
   newSS <- length(unique(newsite))
   newNN <- nrow(newdata)
 
-  tt <- terms(object)
-  Y <- model.response(model.frame(tt, newdata))
-  Terms <- delete.response(tt)
-  m <- model.frame(Terms, newdata)
+  tt <- stats::terms(object)
+  Y <- stats::model.response(stats::model.frame(tt, newdata))
+  Terms <- stats::delete.response(tt)
+  m <- stats::model.frame(Terms, newdata)
   m0 <- m1 <- m
   m0[!(m0[,"lag"] %in% 0:1),"lag"] <- 0
   m1[!(m1[,"lag"] %in% 0:1),"lag"] <- 1
-  X  <- model.matrix(Terms, m )[,colnames(object$x)]
-  X0 <- model.matrix(Terms, m0)[,colnames(object$x)]
-  X1 <- model.matrix(Terms, m1)[,colnames(object$x)]
+  X  <- stats::model.matrix(Terms, m )[,colnames(object$x)]
+  X0 <- stats::model.matrix(Terms, m0)[,colnames(object$x)]
+  X1 <- stats::model.matrix(Terms, m1)[,colnames(object$x)]
 
   if (type == "KFCV") {
     if (is.null(object$extra.coords)) {

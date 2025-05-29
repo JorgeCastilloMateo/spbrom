@@ -11,7 +11,7 @@ Maintainer: Jorge Castillo-Mateo <jorgecastillomateo@gmail.com>
 Description: Fitting, prediction and validation of bivariate spatial models for
   the occurrence of record-breaking events over time in two dependent processes.
 License: GPL (>= 2)
-Imports: Rcpp (>= 1.0.11)
+Imports: coda, pROC, PRROC, Rcpp (>= 1.0.11)
 LinkingTo: Rcpp, RcppArmadillo
 Encoding: UTF-8
 RoxygenNote: 7.3.2
